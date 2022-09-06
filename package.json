@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@work.github.com:coding-boot-camp/module-13-challenge-orm.git"
+    "url": "git@github.com:dopecello/e-commerce-backend.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "William Locke",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mysql2": "^2.1.0",
-    "sequelize": "^5.21.7"
+    "dotenv": "^8.6.0",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^5.22.5"
   }
 }
