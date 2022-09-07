@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
       },
     ],
   })
-    .then((dbProductData) => res.json(dbProductData))
+    .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -33,12 +33,12 @@ router.get("/:id", (req, res) => {
       },
     ],
   })
-    .then((dbProductData) => {
-      if (!dbProductData) {
-        res.status(404).json({ message: "No post found with this id" });
+    .then((dbCategoryData) => {
+      if (!dbCategoryData) {
+        res.status(404).json({ message: "The category you are referencing does not exist!" });
         return;
       }
-      res.json(dbProductData);
+      res.json(dbCategoryData);
     })
     .catch((err) => {
       console.log(err);
@@ -47,11 +47,38 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  // create a new category
+  Category.create({
+    category_name: req.body.category_name,
+  })
+    .then((dbCategoryData) => res.json(dbCategoryData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.put("/:id", (req, res) => {
-  // update a category by its `id` value
+  Category.update(
+    {
+      category_name: req.body.category_name
+    },
+    {
+      where: {
+        id: req.params.id
+      }
+    }
+  )
+  .then(dbCategoryData => {
+    if (!dbCategoryData) {
+      res.status(404).json({ message: 'The category you are trying to update does not exist!' });
+      return;
+    }
+    res.json(dbCategoryData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.delete("/:id", (req, res) => {
