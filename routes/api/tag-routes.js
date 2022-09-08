@@ -36,7 +36,6 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  // expects {tag_name: 'Some Tag'}
   Tag.create({
     tag_name: req.body.tag_name,
   })
@@ -47,7 +46,6 @@ router.post("/", (req, res) => {
     });
 });
 
-// update tag
 router.put("/:id", (req, res) => {
   Tag.update(
     {
