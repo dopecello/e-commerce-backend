@@ -1,92 +1,39 @@
-const router = require("express").Router();
-const { Tag, Product } = require("../../models");
+const router = require('express').Router();
+const { Tag, Product, ProductTag } = require('../../models');
 
-router.get("/", (req, res) => {
+// The `/api/tags` endpoint
+
+router.get('/', (req, res) => {
   Tag.findAll({
-    include: {
-      model: Product,
-      attributes: ["id", "product_name", "price", "stock", "category_id"],
-    },
-  })
-    .then((dbTagData) => res.json(dbTagData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-router.get("/:id", (req, res) => {
-  Tag.findOne({
-    include: {
-      model: Product,
-      attributes: ["id", "product_name", "price", "stock", "category_id"],
-    },
-  })
-    .then((dbTagData) => {
-      if (!dbTagData) {
-        res.status(404).json({ message: "The tag you are trying to find does not exist!" });
-        return;
-      }
-      res.json(dbTagData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-router.post("/", (req, res) => {
-  Tag.create({
-    tag_name: req.body.tag_name,
-  })
-    .then((dbTagData) => res.json(dbTagData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-router.put("/:id", (req, res) => {
-  Tag.update(
-    {
-      tag_name: req.body.tag_name,
-    },
-    {
-      where: {
-        id: req.params.id,
+    include: [
+      {
+        model: Product,
+        attributes: ["id", "product_name", "price", "stock", "category_id"],
       },
-    }
-  )
-    .then((dbTagData) => {
-      if (!dbTagData) {
-        res.status(404).json({ message: "No tag you are trying to update does not exist!" });
-        return;
-      }
-      res.json(dbTagData);
-    })
+    ],
+  })
+    .then((dbCategoryData) => res.json(dbCategoryData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-router.delete("/:id", (req, res) => {
-  Tag.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((dbTagData) => {
-      if (!dbTagData) {
-        res.status(404).json({ message: "The tag you are trying to destroy does not exist!" });
-        return;
-      }
-      res.json(dbTagData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+router.get('/:id', (req, res) => {
+  // find a single tag by its `id`
+  // be sure to include its associated Product data
+});
+
+router.post('/', (req, res) => {
+  // create a new tag
+});
+
+router.put('/:id', (req, res) => {
+  // update a tag's name by its `id` value
+});
+
+router.delete('/:id', (req, res) => {
+  // delete on tag by its `id` value
 });
 
 module.exports = router;
