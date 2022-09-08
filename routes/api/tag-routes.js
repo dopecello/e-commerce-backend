@@ -24,7 +24,7 @@ router.get("/:id", (req, res) => {
   })
     .then((dbTagData) => {
       if (!dbTagData) {
-        res.status(404).json({ message: "No tag found with this id" });
+        res.status(404).json({ message: "The tag you are trying to find does not exist!" });
         return;
       }
       res.json(dbTagData);
@@ -61,7 +61,7 @@ router.put("/:id", (req, res) => {
   )
     .then((dbTagData) => {
       if (!dbTagData) {
-        res.status(404).json({ message: "No tag found with this id" });
+        res.status(404).json({ message: "No tag you are trying to update does not exist!" });
         return;
       }
       res.json(dbTagData);
@@ -80,7 +80,7 @@ router.delete("/:id", (req, res) => {
   })
     .then((dbTagData) => {
       if (!dbTagData) {
-        res.status(404).json({ message: "No tag found with this id!" });
+        res.status(404).json({ message: "The tag you are trying to destroy does not exist!" });
         return;
       }
       res.json(dbTagData);
