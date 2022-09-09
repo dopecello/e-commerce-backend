@@ -7,9 +7,10 @@
 
 ## Description
 
-Core back-end of e-commerce application developed in Node ExpressJS, Sequelize and MySQL. The purpose of the project was modeling the database using Sequelize, combining four table where one of then is a through between Products and Tags. Also each route query use Promise to improve the user experience in the front-end. The use of ORM allowed to write almost everything in JavaScript for complex SQL queries. One of the challenges to work with servers and API is the process of back-and-forth testing. But is could be overcome this problem using Insomnia and to have implemented testing seeds.
+Model of building the back-end for an e-commerce site. Taking a working Express.js API and configuring it to use Sequelize in order to interact with a MySQL database.
 
 ## Screenshot
+![alt_text](ecommerce.png)
 
 ## Table of Contents
 
@@ -105,5 +106,4 @@ https://youtu.be/Uht_zDZBbjY
 Please send your questions [here](mailto:williamlocke.cello@gmail.com?subject=[GitHub]%20ORM%20eCommerce%20Bkend) or visit [github/dopecello](https://github.com/dopecello).
 
 ## Credits
-
-* William Lockes%      
+William Locke      
