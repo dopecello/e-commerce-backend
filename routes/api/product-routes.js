@@ -3,15 +3,15 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 
 router.get("/", (req, res) => {
   Product.findAll({
-    attributes: ["id", "product_name", "price", "stock",],
+    attributes: ["id", "product_name", "price", "stock", "category_id"],
     include: [
       {
         model: Category,
-        attributes: ["category_name"],
+        attributes: ["id", "category_name"],
       },
       {
         model: Tag,
-        attributes: ["tag_name"],
+        attributes: ["tag_name", "id"],
       },
     ],
   })
@@ -31,19 +31,18 @@ router.get("/:id", (req, res) => {
     include: [
       {
         model: Category,
-        attributes: ["category_name"],
+        attributes: ["id", "category_name"],
       },
       {
         model: Tag,
-        attributes: ["tag_name"],
       },
     ],
   })
     .then((dbProductData) => {
       if (!dbProductData) {
-        res
-          .status(404)
-          .json({ message: "The product you are referencing does not exist!" });
+        res.status(404).json({
+          message: "The product you are trying to find does not exist!",
+        });
         return;
       }
       res.json(dbProductData);
@@ -55,6 +54,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  // expects {product_name: 'Some Product', price: 123, stock: 1, category_is: 1, tagIds: [1,2,3,4]}
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -77,6 +77,7 @@ router.post("/", (req, res) => {
     });
 });
 
+// update product
 router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -127,7 +128,7 @@ router.delete("/:id", (req, res) => {
     .then((dbProductData) => {
       if (!dbProductData) {
         res.status(404).json({
-          message: "The product you are trying to destroy does not exist!",
+          message: "The product you are trying to delete does not exist!",
         });
         return;
       }
