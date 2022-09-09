@@ -16,7 +16,7 @@ Model of building the back-end for an e-commerce site. Taking a working Express.
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Datanase Models](#database-models)
+- [Database Models](#database-models)
 - [Credits](#credits)
 - [Questions](#questions)
 
